@@ -1,0 +1,193 @@
+\documentclass[a4paper]{scrreport}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[nswissgerman]{babel}
+\usepackage[babel,german=swiss]{csquotes}
+\usepackage[onehalfspacing]{setspace}
+\usepackage[style=verbose-ibid]{biblatex} % -ibid
+
+
+% Literaturverzeichnis hinzufügen
+\addbibresource{bibliography.bib}
+
+
+% Einstellungen für Darstellung der Fussnoten
+\usepackage[bottom,norule,hang,perpage]{footmisc}
+\setlength{\footnotemargin}{2mm} % Spacing in Fussnoten zwischen der Zahl und dem Text
+% \renewcommand{\footnoterule}{\rule{45mm}{0.1mm}{\vspace*{5mm}}} % Trennlinie über Footer
+
+
+% Einstellunge für Zitierart
+\renewcommand*{\labelnamepunct}{\addcolon\addspace} % Interpunktion in Zitaten zwischen Autor und Titel
+\renewcommand{\newunitpunct}{\addcomma\addspace} % Zitatelemente mit einem Komma trennen (nicht der standardmässig Punkt)
+\renewcommand{\subtitlepunct}{\addperiod\addspace} % Interpunktion in Zitaten zwischen Titel und Untertitel
+
+
+% Spacing des Papiers
+\usepackage{geometry}
+\geometry{a4paper,top=30mm,right=27mm,bottom=30mm,left=27mm}
+
+
+% Überschriftentiefe die im Inhaltsverzeichnis nummeriert werden
+\setcounter{secnumdepth}{3}
+
+
+% Überschriftentiefe die im Inhaltsverzeichnis angezeigt werden
+\setcounter{tocdepth}{3}
+
+
+% Abbildungen (figure) innererhalb einer Section durchnummerieren
+% https://tex.stackexchange.com/a/425603
+% \let\counterwithout\relax
+% \let\counterwithin\relax
+% \usepackage{chngcntr}
+% \counterwithin{figure}{section}
+% \counterwithin{table}{section}
+
+
+% Sections durchgehend nummerieren und nicht von Chapters unterbrechen
+% \usepackage{chngcntr} % chngcntr bereits eingebunden
+% \counterwithout{section}{chapter}
+
+
+% Package um Links im PDF-Dokument zu verwenden
+\usepackage{url}
+
+
+% Package um Bilder (PNG) und PDFs als figures einzubinden
+\usepackage{graphicx}
+
+
+% Placeholder for figures: \includegraphics[width=.5\textwidth]{example-image-a}
+% https://tex.stackexchange.com/a/413186
+\usepackage{mwe}
+
+
+% Package um Symbole für Musik bereitzustellen: \flat \sharp
+% \usepackage{textcomp}
+
+
+% Package um Symbole Noten bereitzustellen: \quarternote \twonotes
+% \usepackage{wasysym}
+
+
+% Package um Generalbassbezifferungen im Fließtext besser zu verwenden
+% https://tex.stackexchange.com/a/267644
+% https://tex.stackexchange.com/a/267618
+% \usepackage{amsmath} % \overset{above}{main}
+
+
+% Command für inline Code im Fließtext
+\newcommand{\code}{\texttt}
+
+
+% Package und Command um Text einzukreisen für Bassstufen
+% https://tex.stackexchange.com/a/199056
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[anchor=text, shape=circle,draw, inner sep=0pt, minimum size=1.2em] (char) {#1\strut};}}
+
+
+% Git Hash der Version erkennen und auf \gitAbbrevHash legen
+\usepackage{xstring}
+\usepackage{catchfile}
+\CatchFileDef{\gitHash}{.git/refs/heads/master}{}
+\newcommand{\gitAbbrevHash}{\StrLeft{\gitHash}{7}}
+
+
+% Alle Quellen im Literaturverzeichnis anzeigen, auch nicht verwendete
+\nocite{*}
+
+
+% Einstellungen für das Stichwortverzeichnis
+% \usepackage{makeidx}
+% \makeindex
+% \renewcommand{\indexname}{Stichwortverzeichnis}
+
+
+% Nummerierung von Sections ohne die Zählung von Chapter
+\renewcommand*\thesection{\arabic{section}}
+
+
+% Spacings in Tabellen
+\setlength{\tabcolsep}{1em} % horizontal padding
+{\renewcommand{\arraystretch}{1.5}% vertical padding
+
+
+% Fussnoten in Tabellen aktivieren mit dem Command \tablefootnote
+\usepackage{tablefootnote}
+
+
+% Zeilenumbrüche in Tabellen erlauben mit \thead{Mixo-\\lydisch} und |makecell{}
+% https://tex.stackexchange.com/a/176780
+\usepackage{makecell}
+
+
+% Fügt Fraktur Schriftarten hinzu: \textfrak{Fraktur} \textswab{Schwabacher} \textgoth{Gothic}
+\usepackage{yfonts}
+
+
+% "Abbildung ..." unter den figures umbenennen
+\usepackage[figurename=Notenbeispiel]{caption}
+\renewcaptionname{nswissgerman}{\listfigurename}{Verzeichnis der Notenbeispiele}
+
+
+% Gestrichelte horizontale Linien in Tabellen mit \hdashline
+\usepackage{arydshln}
+
+
+% Abstände im Inhaltsverzeichnis zwischen Zahl und Titel anpassen
+\usepackage{tocloft}
+\setlength{\cftsecnumwidth}{1.5em}
+\setlength{\cftsubsecnumwidth}{2.1em}
+\setlength{\cftsubsubsecnumwidth}{2.75em}
+
+
+% Sicherstellen, dass figures in der section ausgegeben werden zu der sie gehören
+\usepackage[section]{placeins}
+
+
+
+
+\title{Unbekannter Titel}
+\subtitle{Master Musikpädagogik}
+\subject{Masterthesis}
+\titlehead{
+	\hfill
+	\includegraphics{img/Logo_Musikhochschule.pdf}
+}
+\author{
+	Katharina Jäckle\\
+	Hochschule für Musik Freiburg
+}
+\publishers{
+	Gutachter: Andreas Doerne\\
+}
+\date{\today}
+
+
+
+\begin{document}
+
+	\maketitle
+
+	\tableofcontents
+
+    \include{chapters/vorwort}
+	\include{chapters/einleitung}
+
+	% \clearpage
+	% \addcontentsline{toc}{chapter}{Literatur}
+	% \printbibliography
+
+	% \clearpage
+	% \addcontentsline{toc}{chapter}{Stichwortverzeichnis}
+	% \printindex
+
+	% \clearpage
+	% \addcontentsline{toc}{chapter}{Verzeichnis der Notenbeispiele}
+	% \listoffigures
+
+	\include{chapters/erklaerung}
+
+\end{document}
