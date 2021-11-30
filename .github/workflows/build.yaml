@@ -14,6 +14,8 @@ jobs:
         with:
           fetch-depth: 0
 
+      - run: git checkout master
+
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
