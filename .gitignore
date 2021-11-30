@@ -15,3 +15,4 @@
 *.DS_Store
 !index.pdf
 !img/*.pdf
+index.pdf
